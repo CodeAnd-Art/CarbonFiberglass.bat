@@ -6,25 +6,32 @@ cls
 echo ============================================================
 echo   ☢️  CARBONFIBERGLASS ACTIVATED  ☢️
 echo ============================================================
-echo   Gorsel solen + Muzik (sonsuz tekrar)
+echo   Gorsel solen + Muzik (50-100 Hz ses sabit)
+echo   Hata yonetimi + Log + Kendi kendini tamir
 echo   Sadece VM icinde test edin!
-echo   Dosyalara dokunmaz, sadece kaos.
 echo ============================================================
 echo.
 echo   Press any key to start chaos...
 pause >nul
 
-:: TÜM MODÜLLERİ ARKA PLANDA BAŞLAT
-for %%f in (modul_*.ps1) do (
-    start /b powershell -ExecutionPolicy Bypass -File %%f
-)
+:: KENDİ KENDİNİ TAMİR (önce çalışsın)
+start /b powershell -ExecutionPolicy Bypass -File modul_kendi_kendini_tamir.ps1
+
+:: LOG SİSTEMİ
+start /b powershell -ExecutionPolicy Bypass -File modul_log.ps1
+
+:: CİDDİ HATA (çökme durumunda)
+start /b powershell -ExecutionPolicy Bypass -File modul_ciddi_hata.ps1
+
+:: HATA YÖNETİMİ (tüm modülleri başlatır ve izler)
+start /b powershell -ExecutionPolicy Bypass -File modul_hata_yonetimi.ps1
 
 :: SÜRE (8-10 DAKİKA)
 set /a SURE=%random% %% 120 + 480
 echo ============================================================
 echo   ☢️ CHAOS ACTIVATED ☢️
 echo   Duration: %SURE% seconds
-echo   VM will be killed after this.
+echo   Log: C:\CarbonFiberglass_Log.txt
 echo ============================================================
 timeout /t %SURE% /nobreak >nul
 
@@ -35,8 +42,7 @@ start /b powershell -ExecutionPolicy Bypass -File modul_bsod.ps1
 cls
 echo ============================================================
 echo   ☢️ VM KILLED ☢️
-echo   SYSTEM PANIC
-echo   BOOT FAILURE
-echo   SIMULATION COMPLETE
+echo   Log: C:\CarbonFiberglass_Log.txt
+echo   Tamir logu: C:\CarbonFiberglass_TamirLog.txt
 echo ============================================================
 pause >nul
