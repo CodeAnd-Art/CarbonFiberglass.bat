@@ -6,19 +6,10 @@ $form.WindowState = 'Maximized'
 $form.FormBorderStyle = 'None'
 $form.TopMost = $true
 $form.BackColor = 'Black'
-$form.KeyPreview = $true
 
-$label = New-Object System.Windows.Forms.Label
-$label.Dock = 'Fill'
-$label.Font = New-Object System.Drawing.Font('Consolas', 60, [System.Drawing.FontStyle]::Bold)
-$label.TextAlign = 'MiddleCenter'
-$label.ForeColor = 'White'
-$label.Text = '☢️ SYSTEM PANIC ☢️'
-$form.Controls.Add($label)
-
-$timerGlitch = New-Object System.Windows.Forms.Timer
-$timerGlitch.Interval = 30
-$timerGlitch.Add_Tick({
+$timer = New-Object System.Windows.Forms.Timer
+$timer.Interval = 30
+$timer.Add_Tick({
     try {
         $g = $form.CreateGraphics()
         for ($i=0; $i -lt 600; $i++) {
@@ -42,26 +33,5 @@ $timerGlitch.Add_Tick({
         $g.Dispose()
     } catch {}
 })
-
-$timerText = New-Object System.Windows.Forms.Timer
-$timerText.Interval = 200
-$timerText.Add_Tick({
-    try {
-        $texts = @(
-            '☢️ SYSTEM PANIC', '💀 CRITICAL ERROR',
-            '🔥 MEMORY DUMP', '🌀 KERNEL FAILURE',
-            '⚡ DATA CORRUPTED', '💥 SYSTEM HALTED',
-            '⚠️ RADIATION LEAK', '👾 GLITCH OVERLOAD'
-        )
-        $label.Text = $texts | Get-Random
-        $label.ForeColor = [System.Drawing.Color]::FromArgb(
-            (Get-Random -Min 0 -Max 256),
-            (Get-Random -Min 0 -Max 256),
-            (Get-Random -Min 0 -Max 256)
-        )
-    } catch {}
-})
-
-$timerGlitch.Start()
-$timerText.Start()
+$timer.Start()
 $form.ShowDialog()
