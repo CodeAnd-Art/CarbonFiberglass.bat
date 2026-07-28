@@ -6,7 +6,7 @@ cls
 echo ============================================================
 echo   ☢️  CARBONFIBERGLASS ACTIVATED  ☢️
 echo ============================================================
-echo   Gorsel solen + Muzik + Efektler
+echo   Gorsel solen + Muzik (sonsuz tekrar)
 echo   Sadece VM icinde test edin!
 echo   Dosyalara dokunmaz, sadece kaos.
 echo ============================================================
