@@ -4,8 +4,9 @@ $timer = New-Object System.Windows.Forms.Timer
 $timer.Interval = 300
 $timer.Add_Tick({
     try {
-        $freq = Get-Random -Min 50 -Max 2000
-        $dur = Get-Random -Min 50 -Max 400
+        # Frekans 50-100 Hz arası SABİT (aşağı inmez)
+        $freq = Get-Random -Min 50 -Max 100
+        $dur = Get-Random -Min 50 -Max 200
         [System.Console]::Beep($freq, $dur)
         if ((Get-Random -Min 1 -Max 3) -eq 1) {
             $sesler = @(
